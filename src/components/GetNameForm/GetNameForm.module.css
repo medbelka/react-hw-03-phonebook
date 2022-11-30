@@ -1,0 +1,29 @@
+.FormBox {
+    width: 350px;
+    border: 1px solid grey;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Label {
+    margin-left: 15px;
+    margin-bottom: 20px;
+    display: block;
+    font-size: 16px;
+}
+
+.InputField {
+    margin-top: 5px;
+    display: block;
+    border: 1px solid #dadada;
+}
+
+.SubmitButton {
+    cursor: pointer;
+    background: linear-gradient(blue, #0099ff);
+    padding: 4px 8px 4px 8px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%), 0px 2px 1px rgb(0 0 0 / 20%);
+}
