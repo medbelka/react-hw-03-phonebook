@@ -16,12 +16,30 @@ class App extends Component {
     filter: '',
     }
 
+    // if local storage contains any data = fulfill state contacts from local storage
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if(parsedContacts) {
+      this.setState({ contacts : parsedContacts });
+    }
+  }
+  
+  // saving to local storage every update of state contacts
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  }
+
+  // function for deleting contact from contact list
   deleteContact = (contactId) => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId)
     }))
   }
 
+  // function for adding new contact to contact list, contains alert, preventing adding contacts that already exist
   addContact = (name, number) => {
     const existingContact = this.state.contacts.find(contact=>
       contact.name === name )
@@ -39,15 +57,18 @@ class App extends Component {
       })) }
   }
 
+  // function to receive values from formik add putting data to addContact
   handleSubmit = (values, {resetForm}) => {
     this.addContact(values.name, values.number)
     resetForm()
   }
 
+  // function for listening changes in filter input
   changeFilter = e => {
     this.setState({filter: e.currentTarget.value})
   }
 
+  // function for filtering contacts including symbols from filter input
   getVisibleContacts = () =>{
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
